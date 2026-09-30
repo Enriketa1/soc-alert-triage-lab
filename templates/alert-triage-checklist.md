@@ -1,38 +1,33 @@
-# SOC Alert Triage Checklist
+# Alert Triage Checklist
 
-Use this template to document a security alert consistently.
+This is the checklist I use to keep my alert notes organized.
 
-## Alert Information
+## Alert details
 
 - **Alert name:**
-- **Alert source:**
-- **Detection date/time:**
-- **Affected user/account/device:**
-- **Alert description:**
+- **Source:**
+- **Date/time:**
+- **User, account, or device involved:**
+- **What happened:**
 - **Initial severity:**
 
-## Evidence Review
+## What I checked
 
 - **Evidence reviewed:**
-- **Potential impact:**
-- **Possible legitimate explanation:**
+- **Possible impact:**
+- **Possible normal explanation:**
 - **Possible malicious explanation:**
 - **False-positive considerations:**
-- **Additional information required:**
+- **What information is still missing:**
 
-## Analyst Decision
+## Decision
 
-- **Recommended action:**
-- **Escalation decision:** Yes / No / Pending additional context
-- **Reasoning:**
+- **Recommended next step:**
+- **Escalate:** Yes / No / Need more context
+- **Why:**
 - **Analyst notes:**
-- **Supervisor-review status:** Pending / Reviewed
+- **Supervisor review:** Pending / Reviewed
 
-## Investigation Principles
+### Notes to myself
 
-- Separate observed facts from assumptions.
-- Do not treat an alert as proof of compromise.
-- Consider both legitimate and malicious explanations.
-- Record evidence that supports the disposition.
-- Document missing context.
-- Escalate when the potential impact or uncertainty requires additional authority or investigation.
+I try to keep facts and assumptions separate. If I do not have enough information, I document what is missing instead of guessing. I also check for a legitimate explanation before deciding that an alert is malicious.
