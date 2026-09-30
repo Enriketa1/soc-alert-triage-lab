@@ -1,70 +1,55 @@
-# Case 01 — Repeated Failed Sign-ins
+# Case 01 - Repeated Failed Sign-ins
 
 ## Scenario
 
-A fictional Microsoft 365 user account generated **15 failed sign-in attempts within 10 minutes**. The attempts originated from an unfamiliar external IP address. No successful sign-in from that IP address was recorded. The user had not yet been contacted.
+A fictional Microsoft 365 user had 15 failed sign-in attempts in about 10 minutes. The attempts came from an external IP that was not recognized in the scenario. There was no successful sign-in from that IP, and the user had not been contacted yet.
 
-## Initial Interpretation
+## My first thought
 
-The pattern warrants investigation because repeated authentication failures from an unfamiliar external source can be consistent with password guessing or use of incorrect/stolen credentials. The available facts do **not** establish account compromise because no successful sign-in from the source was reported.
+I would not call this an account compromise based only on the failed attempts. However, 15 failures in a short period from an unfamiliar IP are enough for me to look into it further.
 
-## Evidence to Review
+## What I would check
 
-- Microsoft 365 / Entra sign-in history around the alert window
-- Exact timestamps and frequency of the failures
-- Source IP and available location/network context
-- Authentication failure reason
-- Device/client/application information
-- Any successful sign-ins before or after the failures
-- MFA activity or prompts
-- Risk detections associated with the account
-- User's normal sign-in pattern
-- User confirmation regarding travel, VPN use, password problems, or unfamiliar prompts
+- Sign-in activity around the same time
+- Exact timestamps of the failed attempts
+- Source IP and location information
+- Reason the authentication failed
+- Device or application used
+- Successful logins before or after the alert
+- MFA activity
+- Whether the user recognizes the activity
+- Whether the user was traveling or using a VPN
 
-## Possible Legitimate Explanations
+## What could explain it?
 
-- User repeatedly entered an incorrect password
-- An application or device retained stale credentials
-- A VPN or network service caused the source to appear unfamiliar
-- A legitimate automated process attempted authentication with outdated credentials
+A normal explanation could be the user entering an old password, a device or application still using saved credentials, or a VPN making the connection appear to come from a different location.
 
-These explanations require validation; they should not be assumed.
+On the other hand, it could also be password guessing, credential stuffing, or someone testing credentials from outside the organization.
 
-## Possible Malicious Explanations
+At this point I would keep both possibilities open because I do not have enough evidence to confirm either one.
 
-- Password guessing
-- Credential stuffing
-- Attempted use of previously exposed credentials
-- An attacker testing whether credentials are valid
+## Severity
 
-## Proposed Severity
+**Medium**
 
-**Medium (provisional).**
+I chose Medium because the attempts are repeated and come from an unfamiliar source, but there is no successful login from that IP in the scenario. I would raise the severity if I later found a successful login, suspicious MFA activity, or other activity on the account.
 
-Reasoning: the repeated failures and unfamiliar external source are security-relevant, but the scenario states that no successful authentication from that IP occurred. Severity should be reassessed if additional evidence shows successful access, MFA abuse, privileged-account targeting, or suspicious post-authentication activity.
+## What I still need
 
-## Additional Information Required
+The biggest missing piece is the user's confirmation. I would also want to see the sign-in activity before and after the failed attempts to make sure there was not a successful login from another suspicious source.
 
-The most important missing context is the user's confirmation and surrounding authentication history. The analyst should determine whether the source/activity is recognized and whether any successful or risky authentication occurred near the same time.
+## Next steps
 
-## Recommended Actions
+1. Review the account's sign-in history.
+2. Check for successful logins around the same time.
+3. Review MFA activity if available.
+4. Contact the user through an approved method and ask whether they recognize the activity.
+5. Escalate further if I find evidence of successful access or other suspicious activity.
 
-1. Review the account's authentication activity around the detection window.
-2. Check for successful sign-ins associated with the same source or unusual locations/devices.
-3. Review MFA and identity-risk information where available.
-4. Contact the user through an approved channel to validate the activity.
-5. Preserve/document relevant evidence and timestamps.
-6. Follow the organization's identity-response process if compromise indicators are discovered.
+## Decision
 
-## Escalation Decision
-
-**Escalate for additional identity investigation / validation.**
-
-The combination of repeated failures and an unfamiliar external source justifies additional review. Escalation here does not mean the account is confirmed compromised; it means the available evidence is insufficient to safely dismiss the activity.
-
-## Analyst Conclusion
-
-**Disposition:** Requires additional context / security-relevant authentication activity  
+**Disposition:** Needs more context  
+**Escalation:** Yes, for additional identity review  
 **Confidence:** Medium
 
-No successful sign-in from the unfamiliar IP is reported, which reduces evidence of compromise. However, the source is unfamiliar, the attempt volume is notable, and the user has not yet validated the activity. Additional identity evidence is required before closure.
+My reason for escalating is not that I think the account is definitely compromised. I would escalate because the source is unfamiliar, there are repeated attempts, and I still need more information before I would be comfortable closing the alert.
