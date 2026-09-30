@@ -1,61 +1,57 @@
-# Case 02 — Suspicious Email
+# Case 02 - Suspicious Email
 
 ## Scenario
 
-A fictional employee received an email asking them to verify their Microsoft 365 password through an external link. The sender's display name resembled a known vendor, but the sending domain was different. The email used urgent language and warned that the employee's account would be disabled. The employee had **not clicked the link**.
+A fictional employee received an email asking them to verify their Microsoft 365 password using an external link. The display name looked similar to a known vendor, but the actual sending domain was different. The message was urgent and said the employee's account would be disabled. The employee did not click the link.
 
-## Suspicious Indicators
+## What stood out to me
 
-- Request to verify Microsoft 365 credentials through an external link
-- Display-name resemblance to a trusted vendor
-- Sending domain different from the expected vendor domain
-- Urgent language designed to pressure the recipient
-- Threat that the employee's account would be disabled
+The biggest red flags were:
 
-Together, these characteristics are consistent with common credential-phishing techniques, although sender and message evidence should still be validated.
+- The email asked for password verification through an external link.
+- The display name looked familiar, but the domain did not match the vendor.
+- The message tried to create urgency.
+- It threatened that the account would be disabled.
 
-## Evidence to Review
+This looks like a credential-phishing attempt, but I would still check the message details before making the final determination.
 
-- Full message headers
-- Sender address and sending domain
+## What I would check
+
+- Full email headers
+- Sender address and domain
 - Reply-To address
-- SPF, DKIM, and DMARC results where available
-- Message routing information
-- URL destination/domain without directly visiting the suspicious link
-- Whether similar messages reached other recipients
-- Email-security detections/verdicts
-- User confirmation that the link was not clicked
-- Any related sign-in activity if exposure is suspected
+- SPF, DKIM, and DMARC results
+- Where the message came from and how it was routed
+- The link/domain without clicking the link
+- Whether other employees received the same message
+- Any email-security verdict or alert
+- Confirmation that the employee did not interact with the message
 
-## Possible Legitimate Explanation
+## Could it be legitimate?
 
-A legitimate vendor could theoretically use a changed domain or third-party email service. However, a legitimate explanation would need to be verified through trusted contact information or established organizational procedures—not through the link or contact details in the suspicious message.
+It is possible that a vendor changed domains or used another email service. I would verify that separately using contact information we already trust. I would not use the link or contact details inside the suspicious email to verify it.
 
-## Proposed Severity
+## Severity
 
-**Medium (provisional).**
+**Medium**
 
-The message contains multiple phishing indicators and requests credentials, creating meaningful potential impact. The reported lack of user interaction lowers the immediate impact compared with a case involving clicked links or submitted credentials.
+I chose Medium because the email is asking for credentials and has several phishing indicators. The employee did not click the link, so there is no indication in the scenario that credentials were entered or the account was compromised.
 
-## Recommended Actions
+If the employee had clicked the link, entered credentials, or if the same email had reached many users, I would treat the situation as more urgent.
 
-1. Preserve the message and relevant headers for analysis.
-2. Do not click or test the suspicious link.
-3. Validate the sender/domain using trusted information.
-4. Check whether the same or similar message reached additional recipients.
-5. Use the organization's email-security/reporting process to contain the message if confirmed malicious.
-6. Continue to verify that the recipient did not interact with the link.
-7. Escalate immediately if evidence shows credential submission, malicious attachment execution, or broader targeting.
+## Next steps
 
-## Escalation Decision
+1. Save the email and headers for review.
+2. Do not click the link.
+3. Verify the sender/domain through a trusted source.
+4. Check whether the same message was delivered to other users.
+5. Report or contain the email through the normal security process if it is confirmed malicious.
+6. Escalate immediately if I find that the employee entered credentials or interacted with malicious content.
 
-**Escalate/report through the phishing investigation process.**
+## Decision
 
-The credential request, mismatched domain, vendor impersonation pattern, and urgency provide sufficient indicators for security review. Because the employee reportedly did not click the link, there is no stated evidence of account compromise in the scenario.
+**Disposition:** Likely phishing  
+**Escalation:** Yes, through the phishing review process  
+**Confidence:** Medium-High
 
-## Analyst Conclusion
-
-**Disposition:** Likely phishing attempt requiring security review  
-**Confidence:** Medium-High based on the scenario indicators
-
-The message contains several independent phishing indicators. The absence of user interaction reduces immediate exposure, but sender/header analysis and organization-wide message search would be appropriate before final closure.
+The mismatched domain, credential request, and urgency are enough for me to treat the email as suspicious. Since the employee did not click the link, I would focus first on confirming the sender and checking whether anyone else received or interacted with the message.
